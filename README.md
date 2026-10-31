@@ -4,6 +4,8 @@ Reproducible PyTorch image classification training, evaluation, checkpointing an
 
 ## Dataset and terms
 
+For module-by-module walkthroughs, reproduction steps, and interview concepts, see [DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md).
+
 The default experiment uses CIFAR-10 through `torchvision.datasets.CIFAR10`. The source page describes 60,000 32×32 color images in ten classes and asks users to cite the accompanying technical report. The page does not state a clear license grant, so this repository does not redistribute the dataset; review the source terms for your intended use and cite the report. The test partition is only evaluated after selecting the checkpoint by validation accuracy.
 
 - [CIFAR-10 source and download](https://www.cs.toronto.edu/~kriz/cifar.html)
