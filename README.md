@@ -2,6 +2,36 @@
 
 Reproducible PyTorch image classification training, evaluation, checkpointing and inference. Vision Bench compares a small convolutional neural network with a CIFAR-adapted ResNet-18. It is designed to make the training process inspectable: data splitting, augmentation, optimization, checkpoint selection, and test evaluation are separate steps.
 
+## Problem
+
+The repository provides an inspectable CIFAR-10 training benchmark: a small CNN baseline and a deeper ResNet-18 trained from random initialization. It is intended to compare training mechanics and model behavior, not claim production image recognition.
+
+## Features
+
+- Deterministic train/validation split with augmentation only on training examples.
+- Shared PyTorch training/evaluation loop, seeded settings and best-validation checkpointing.
+- Accuracy, macro F1, confusion matrix and class-wise report on the held-out test partition.
+- CPU support, optional CUDA device selection, curves and single-image inference.
+
+## Architecture
+
+```mermaid
+flowchart LR
+  A[CIFAR-10] --> B[Seeded train/validation split]
+  B --> C[Augmented training loader]
+  B --> D[Unaugmented validation loader]
+  A --> E[Official test loader]
+  C --> F[TinyCNN or ResNet-18 training]
+  D --> G[Epoch validation]
+  F --> G
+  G --> H[Best validation checkpoint]
+  H --> I[Reload and evaluate test once]
+  I --> J[Metrics, history and curves]
+  H --> K[Image inference]
+```
+
+**Stack:** Python, PyTorch/torchvision, scikit-learn metrics, Pillow, matplotlib, pytest and Ruff.
+
 ## Dataset and terms
 
 For module-by-module walkthroughs, reproduction steps, and interview concepts, see [DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md).
@@ -59,6 +89,14 @@ CI on Python 3.11 runs Ruff lint and formatting checks, the test suite on CPU, a
 ## Limitations
 
 This is a small educational benchmark, not a production classifier. CIFAR-10 images are low resolution and do not represent general image distributions. The ResNet-18 comparison is trained from random initialization; no pretrained weights are downloaded. No performance results are published in this README until a full dataset experiment has been run and reviewed. CUDA behavior is not verified on the current CPU-only PyTorch installation.
+
+## Roadmap
+
+- Run and record full CIFAR experiments with hardware, library versions and seeds.
+- Compare multiple seeds before making model-performance claims.
+- Consider pretrained transfer learning only with documented weight provenance and a fair protocol.
+
+See [DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md) for the module walkthrough and reproducible commands.
 
 ## License
 
