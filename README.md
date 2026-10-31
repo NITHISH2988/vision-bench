@@ -1,6 +1,6 @@
 # Vision Bench
 
-Vision Bench compares a small convolutional neural network with a CIFAR-adapted ResNet-18. It is designed to make the training process inspectable: data splitting, augmentation, optimization, checkpoint selection, and test evaluation are separate steps.
+Reproducible PyTorch image classification training, evaluation, checkpointing and inference. Vision Bench compares a small convolutional neural network with a CIFAR-adapted ResNet-18. It is designed to make the training process inspectable: data splitting, augmentation, optimization, checkpoint selection, and test evaluation are separate steps.
 
 ## Dataset and terms
 
